@@ -4,68 +4,24 @@ import java.util.Scanner;
 
 public class Main {
 
+	public static final Scanner scan = new Scanner(System.in);
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		int[] kors = new int[3];
 		
-		int total = 0;
-		float avg;
-		int menu;
 		boolean keepLoop = true;
-		
-		Scanner scan = new Scanner(System.in);
+		int menu;
 		
 		while(keepLoop) {
-			System.out.println("┌────────────────────────┐");
-			System.out.println("│      메 인   메 뉴                       │");
-			System.out.println("└────────────────────────┘");
-			System.out.println("\t1. 성적 입력");
-			System.out.println("\t2. 성적 출력");
-			System.out.println("\t3. 종료");
-			System.out.println("\t선택 >");
-			
-			menu = scan.nextInt();
+			menu = inputMenu();
 			
 			switch(menu) {
 			case 1:
-				
-				System.out.println("┌──────────────────┐");
-				System.out.println("│     성적 입력            │");
-				System.out.println("└──────────────────┘");
-				System.out.println();
-				
-				for(int i = 0; i < 3; i++) {
-					do {
-						System.out.printf("국어%d : ", i+1);
-						kors[i] = scan.nextInt();
-						
-						if(kors[i] < 0 || 100 < kors[i])
-						{
-							System.out.println("국어성적은 0~100까지의 범위만 입력이 가능합니다.");
-						}
-					} while(kors[i]<0 || 100 < kors[i]);
-				}
-				
-				System.out.println("────────────────────────");
+				inputScores(kors);
 				break;
 			case 2:
-				for(int i = 0; i < 3; i++) {
-					total += kors[i];
-				}
-				avg = total / 3.0f;
-				
-				System.out.println("┌──────────────────┐");
-				System.out.println("│     성적 출력            │");
-				System.out.println("└──────────────────┘");
-				System.out.println();
-				
-				for(int i = 0; i < 3; i++) {
-					System.out.printf("국어 %d : %3d\n", 3-i, kors[i]);
-				}
-				System.out.printf("총점 : %3d\n", total);
-				System.out.printf("평균 : %6.2f\n", avg);
-				System.out.println("────────────────────────");
-				
+				outputScores(kors);
 				break;
 			case 3:
 				System.out.println("Bye~~");
@@ -78,6 +34,70 @@ public class Main {
 			}
 			
 		}
+		
+	}
+	
+	static int inputMenu() {
+
+		System.out.println("┌────────────────────────┐");
+		System.out.println("│      메 인   메 뉴                       │");
+		System.out.println("└────────────────────────┘");
+		System.out.println("\t1. 성적 입력");
+		System.out.println("\t2. 성적 출력");
+		System.out.println("\t3. 종료");
+		System.out.println("\t선택 >");
+		
+		return scan.nextInt();
+	}
+	
+	static void inputScores(int[] kors) {	
+		
+		int kor;
+		
+		System.out.println("┌──────────────────┐");
+		System.out.println("│     성적 입력                │");
+		System.out.println("└──────────────────┘");
+		System.out.println();
+		
+		for(int i = 0; i < 3; i++) {
+			do {
+				System.out.printf("국어%d : ", i+1);
+				kor = scan.nextInt();
+				
+				if(kor < 0 || 100 < kor)
+				{
+					System.out.println("국어성적은 0~100까지의 범위만 입력이 가능합니다.");
+				}
+			} while(kor<0 || 100 < kor);
+			
+			kors[i] = kor;
+		}
+		
+		System.out.println("────────────────────────");
+		
+	}
+	
+	static void outputScores(int[] kors) {
+		
+		int total = 0;
+		float avg;
+		
+		for(int i = 0; i < 3; i++) {
+			total += kors[i];
+		}
+		avg = total / 3.0f;
+		
+		System.out.println("┌──────────────────┐");
+		System.out.println("│     성적 출력            │");
+		System.out.println("└──────────────────┘");
+		System.out.println();
+		
+		for(int i = 0; i < 3; i++) {
+			System.out.printf("국어 %d : %3d\n", 3-i, kors[i]);
+		}
+		System.out.printf("총점 : %3d\n", total);
+		System.out.printf("평균 : %6.2f\n", avg);
+		System.out.println("────────────────────────");
 		
 	}
 
