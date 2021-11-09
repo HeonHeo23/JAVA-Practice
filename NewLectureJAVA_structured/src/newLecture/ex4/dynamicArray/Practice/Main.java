@@ -40,13 +40,18 @@ public class Main {
 
 	private static void print(ExamList list) {
 		
+		print(list, list.current);
+		
+	}
+	private static void print(ExamList list, int size) {
+		
 		System.out.println("┌──────────────────┐");
 		System.out.println("│     성적 출력                │");
 		System.out.println("└──────────────────┘");
 		System.out.println();
 		
 		Exam[] exams = list.exams;
-		int size = list.current;
+		//int size = list.current;
 		
 		for(int i=0; i<size; i++) {
 			
