@@ -42,7 +42,7 @@ public class ExamList {
 			float avg = exam.avg();
 			
 			System.out.printf("識м: %d\n", sum);
-			System.out.printf("ゎ敕: %f\n", avg);
+			System.out.printf("ゎ敕: %.2f\n", avg);
 			System.out.println("式式式式式式式式式式式式式式式式式式式式式式式式");
 			
 		}
