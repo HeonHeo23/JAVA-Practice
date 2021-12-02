@@ -26,6 +26,9 @@ public class Program5 {
 			case 4:
 				break;
 			case 5:
+				console.inputSearchMenu();
+				break;
+			case 6:
 				break EXIT;
 			default: 
 				System.out.println("<<사용 방법>> 메뉴는 1~4까지만 입력할 수 있습니다");

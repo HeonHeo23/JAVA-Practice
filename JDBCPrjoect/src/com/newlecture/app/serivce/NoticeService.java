@@ -40,21 +40,18 @@ public class NoticeService {
 		return count;
 	}
 	
-	public List<Notice> getList(int page) throws ClassNotFoundException, SQLException {
+	public List<Notice> getList(int page, String field, String query) throws ClassNotFoundException, SQLException {
 		int start = 1 + (page - 1) * 10;
 		int end = 10*page;
 		
-		String sql = "SELECT * FROM ("
-				+ "	SELECT @ROWNUM:=@ROWNUM+1 NUM, N.* FROM ("
-				+ "		SELECT * FROM NOTICE, (SELECT @ROWNUM:=0) NUM ORDER BY REGDATE DESC"
-				+ "	) N"
-				+ ") Q WHERE NUM BETWEEN ? AND ?;";
+		String sql = "SELECT S.* FROM (SELECT @ROWNUM:=0 NUM) P, NOTICE_VIEW S WHERE "+field+" LIKE ? AND s.NUM BETWEEN ? AND ?";
 		
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url, uid, pwd);
 		PreparedStatement st = conn.prepareStatement(sql);
-		st.setInt(1, start);
-		st.setInt(2, end);
+		st.setString(1, "%"+query+"%");
+		st.setInt(2, start);
+		st.setInt(3, end);
 		
 		ResultSet rs = st.executeQuery();
 		
